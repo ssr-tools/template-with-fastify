@@ -32,7 +32,10 @@ fastify.get("*", async (request, reply) => {
 
   const manifestUrl = `${assetsUrl}/manifest.json`;
 
-  manifestPromise = manifestPromise || fetchManifest(manifestUrl);
+  manifestPromise =
+    process.env.NODE_ENV !== "development" && manifestPromise
+      ? manifestPromise
+      : fetchManifest(manifestUrl);
 
   const manifest = await manifestPromise;
 
