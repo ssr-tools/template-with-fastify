@@ -2,7 +2,7 @@
 
 Hi! This is a really simple project. It shows the usage of [ssr-tools](https://github.com/ssr-tools/ssr-tools) combined with [fastify](https://github.com/fastify/fastify).
 
-You can see live demo on: https://ssr-t-twf.herokuapp.com/
+You can see a live demo at: https://ssr-t-twf.herokuapp.com/
 
 # Getting started
 
