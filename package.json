@@ -2,7 +2,7 @@
   "name": "template-with-fastify",
   "version": "0.0.0",
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "dev": "PORT=3000 NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts",
     "build": "NODE_ENV=production ts-node --transpile-only ./src/index.ts",
     "start": "NODE_ENV=production node dist/server",
     "prepare": "husky install",

@@ -11,6 +11,14 @@ import { App } from "./components/App";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ErrorOccured } from "./pages/ErrorOccured";
 
+const port = Number(process.env.PORT);
+
+if (Number.isNaN(port)) {
+  throw new Error("Invalid port!");
+}
+
+let manifestCache: ReturnType<typeof fetchManifest> | null = null;
+
 const fastify = Fastify({
   logger: true,
 });
@@ -32,12 +40,12 @@ fastify.get("*", async (request, reply) => {
 
   const manifestUrl = `${assetsUrl}/manifest.json`;
 
-  manifestPromise =
-    process.env.NODE_ENV !== "development" && manifestPromise
-      ? manifestPromise
+  manifestCache =
+    process.env.NODE_ENV !== "development" && manifestCache
+      ? manifestCache
       : fetchManifest(manifestUrl);
 
-  const manifest = await manifestPromise;
+  const manifest = await manifestCache;
 
   if (!manifest) {
     return reply
@@ -89,11 +97,9 @@ fastify.get("*", async (request, reply) => {
 
 (async () => {
   try {
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
   }
 })();
-
-let manifestPromise: ReturnType<typeof fetchManifest> | null = null;
