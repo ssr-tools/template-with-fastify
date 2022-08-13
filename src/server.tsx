@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import { renderToStream } from "@ssr-tools/core/renderToStream";
 import fastifyStatic from "@fastify/static";
+import fastifyCompress from "@fastify/compress";
 import { webpackConfig } from "./config/webpackConfig";
 import { URL } from "url";
 import { Document } from "./components/Document.server";
@@ -24,6 +25,8 @@ const fastify = Fastify({
 });
 
 const staticAssetsPrefix = "/public";
+
+fastify.register(fastifyCompress);
 
 fastify.register(fastifyStatic, {
   root: webpackConfig.clientOutputPath,

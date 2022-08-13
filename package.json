@@ -12,15 +12,16 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@fastify/compress": "^6.1.0",
     "@fastify/static": "^6.5.0",
     "@ssr-tools/core": "^0.0.12",
     "@ssr-tools/css": "^0.0.16",
     "@ssr-tools/router": "^0.0.6",
     "fastify": "^4.4.0",
     "long": "^5.2.0",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-error-boundary": "^3.1.4",
-    "react": "^18.2.0"
+    "react-error-boundary": "^3.1.4"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",
