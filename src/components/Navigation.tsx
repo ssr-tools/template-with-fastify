@@ -33,6 +33,15 @@ export const Navigation = () => (
       <li>
         <A pathPattern="/about">About</A>
       </li>
+      <li>
+        <a
+          href="https://github.com/ssr-tools/template-with-fastify"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GitHub repo
+        </a>
+      </li>
     </ul>
   </Nav>
 );
