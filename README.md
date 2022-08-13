@@ -53,7 +53,7 @@ In the `package.json` file, you can find the following scripts:
 
 - `npm run dev` - starts the development server
 - `npm run build` - builds the app
-- `npm run start` - starts the builded app
+- `npm run start` - starts the production build of the app. **Make sure you are providing `PORT` env variable to this command**
 - `npm run prepare` - install the git hooks (pre-commit, pre-push)
 - `npm run lint` - run ESLint check against the all source files
 - `npm run test` - runs unit/integration tests (`*.test.ts(x)` files)

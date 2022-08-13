@@ -14,7 +14,7 @@ import { ErrorOccured } from "./pages/ErrorOccured";
 const port = Number(process.env.PORT);
 
 if (Number.isNaN(port)) {
-  throw new Error("Invalid port!");
+  throw new Error('"PORT" (env variable) is missing or malformed');
 }
 
 let manifestCache: ReturnType<typeof fetchManifest> | null = null;
@@ -31,10 +31,11 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.get("*", async (request, reply) => {
-  const appUrl = new URL(
-    request.url,
-    `${request.protocol}://${request.headers.host}`
-  );
+  // heroku sends the "x-forwarded-proto" header to expose the protocol of the
+  // original request. Otherwise, the protocol is hidden by their reverse proxy.
+  const protocol = request.headers["x-forwarded-proto"] ?? request.protocol;
+
+  const appUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
 
   const assetsUrl =
     process.env.NODE_ENV === "production"
