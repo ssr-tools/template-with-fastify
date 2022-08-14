@@ -10,7 +10,7 @@ import { Providers } from "./components/Providers.server";
 import { fetchManifest } from "@ssr-tools/core/fetchManifest";
 import { App } from "./components/App";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ErrorOccured } from "./pages/ErrorOccured";
+import { ErrorOccurred } from "./pages/ErrorOccurred";
 
 const port = Number(process.env.PORT);
 
@@ -62,7 +62,7 @@ fastify.get("*", async (request, reply) => {
         "<!DOCTYPE html>" +
           renderToStaticMarkup(
             <Document>
-              <ErrorOccured
+              <ErrorOccurred
                 error={new Error(`Cannot load manifest from "${manifestUrl}"`)}
               />
             </Document>
@@ -91,7 +91,7 @@ fastify.get("*", async (request, reply) => {
             "<!DOCTYPE html>" +
               renderToStaticMarkup(
                 <Document>
-                  <ErrorOccured error={error} />
+                  <ErrorOccurred error={error} />
                 </Document>
               )
           );
