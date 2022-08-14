@@ -14,7 +14,7 @@
   "dependencies": {
     "@fastify/compress": "^6.1.0",
     "@fastify/static": "^6.5.0",
-    "@ssr-tools/core": "^0.0.12",
+    "@ssr-tools/core": "^0.0.13",
     "@ssr-tools/css": "^0.0.16",
     "@ssr-tools/router": "^0.0.6",
     "fastify": "^4.4.0",
