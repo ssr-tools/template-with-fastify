@@ -28,7 +28,7 @@
     "@types/jest-environment-puppeteer": "^5.0.2",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
-    "eslint": "^8.21.0",
+    "eslint": "^8.22.0",
     "eslint-config-ssr-tools": "0.0.4",
     "husky": "^8.0.1",
     "jest": "^28.1.3",
