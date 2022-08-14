@@ -2,7 +2,8 @@
 
 Hi! This is a really simple project. It shows the usage of [ssr-tools](https://github.com/ssr-tools/ssr-tools) combined with [fastify](https://github.com/fastify/fastify).
 
-You can see a live demo at: https://ssr-t-twf.herokuapp.com/
+You can see a live demo at: 
+  - https://ssr-t-twf.herokuapp.com (cold start of the free dyno on heroku takes a few seconds)
 
 # Getting started
 
