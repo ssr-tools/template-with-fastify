@@ -2,7 +2,7 @@
   "name": "template-with-fastify",
   "version": "0.0.0",
   "scripts": {
-    "dev": "PORT=3000 NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "dev": "PORT=3000 HOST=0.0.0.0 NODE_ENV=development ts-node-dev --respawn --transpile-only ./src/index.ts",
     "build": "NODE_ENV=production ts-node --transpile-only ./src/index.ts",
     "start": "NODE_ENV=production node dist/server",
     "prepare": "husky install",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@fastify/compress": "^6.1.0",
     "@fastify/static": "^6.5.0",
-    "@ssr-tools/core": "^0.0.13",
+    "@ssr-tools/core": "^0.0.14",
     "@ssr-tools/css": "^0.0.16",
     "@ssr-tools/router": "^0.0.6",
     "fastify": "^4.4.0",

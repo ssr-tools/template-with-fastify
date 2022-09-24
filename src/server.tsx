@@ -12,38 +12,25 @@ import { App } from "./components/App";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ErrorOccurred } from "./pages/ErrorOccurred";
 
-const port = Number(process.env.PORT);
-
-if (Number.isNaN(port)) {
-  throw new Error('"PORT" (env variable) is missing or malformed');
-}
-
 let manifestCache: ReturnType<typeof fetchManifest> | null = null;
 
 const fastify = Fastify({
   logger: true,
 });
 
-const staticAssetsPrefix = "/public";
-
 fastify.register(fastifyCompress);
 
 fastify.register(fastifyStatic, {
   root: webpackConfig.clientOutputPath,
-  prefix: staticAssetsPrefix,
+  prefix: "/" + webpackConfig.assetsPrefix,
 });
 
 fastify.get("*", async (request, reply) => {
-  // heroku sends the "x-forwarded-proto" header to expose the protocol of the
-  // original request. Otherwise, the protocol is hidden by their reverse proxy.
-  const protocol = request.headers["x-forwarded-proto"] ?? request.protocol;
+  const protocol = request.protocol;
 
   const appUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
 
-  const assetsUrl =
-    process.env.NODE_ENV === "production"
-      ? new URL(staticAssetsPrefix, appUrl)
-      : `http://localhost:${webpackConfig.devServerPort}`;
+  const assetsUrl = new URL("/" + webpackConfig.assetsPrefix, appUrl);
 
   const manifestUrl = `${assetsUrl}/manifest.json`;
 
@@ -104,7 +91,10 @@ fastify.get("*", async (request, reply) => {
 
 (async () => {
   try {
-    await fastify.listen({ port, host: "0.0.0.0" });
+    await fastify.listen({
+      port: webpackConfig.appPort,
+      host: webpackConfig.appHost,
+    });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
