@@ -8,11 +8,9 @@ module.exports = {
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
   modulePathIgnorePatterns: ["/dist/"],
   setupFilesAfterEnv: ["./jest.setup.ts"],
-  globals: {
-    "ts-jest": {
-      isolatedModules: true,
-      jsx: "react-jsx",
-    },
+  transformIgnorePatterns: ["/dist/"],
+  transform: {
+    "^.+\\.ts?$": "ts-jest",
   },
   maxWorkers: 2,
   maxConcurrency: 1,
