@@ -1,16 +1,25 @@
 // @ts-check
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/** @type {import("jest").Config} */
 module.exports = {
-  preset: "ts-jest",
   testEnvironment: "jsdom",
   testMatch: ["<rootDir>/**/*.test.ts?(x)"],
   testPathIgnorePatterns: ["/node_modules/", "/dist/"],
   modulePathIgnorePatterns: ["/dist/"],
   setupFilesAfterEnv: ["./jest.setup.ts"],
-  transformIgnorePatterns: ["/dist/"],
   transform: {
-    "^.+\\.ts?$": "ts-jest",
+    "^.+\\.tsx?$": [
+      "@swc/jest",
+      {
+        jsc: {
+          transform: {
+            react: {
+              runtime: "automatic",
+            },
+          },
+        },
+      },
+    ],
   },
   maxWorkers: 2,
   maxConcurrency: 1,
