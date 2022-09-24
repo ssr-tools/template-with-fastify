@@ -3,11 +3,11 @@
 Hi! This is a really simple project. It shows the usage of [ssr-tools](https://github.com/ssr-tools/ssr-tools) combined with [fastify](https://github.com/fastify/fastify).
 
 You can see a live demo at: 
-  - https://ssr-t-twf.herokuapp.com (cold start of free dyno on heroku takes a few seconds)
+  - https://ssr-tools-template-with-fastify.onrender.com
 
 # Getting started
 
-tldr; Clone the repo and run `npm run dev`. The development server should start on `http://localhost:3000`.
+tldr; Clone the repo and run `npm run dev`. The development server should start on `http://localhost:8080`.
 
 There are, however, more detailed instructions below.
 
@@ -30,9 +30,9 @@ Then:
 1. Go to the repository's directory: `cd {project's name}`
 1. Install the packages: `npm i`
 1. Start the development server: `npm run dev`
-1. In your browser, open up the development version of the app by going to the `http://localhost:3000`
+1. In your browser, open up the development version of the app by going to the `http://localhost:8080`
 1. In the project's directory, open up `pages/Home.tsx` using your source-code editor and try to change something
-1. If everything went fine, you should see live updates on `http://localhost:3000` when you save the file with some changes
+1. If everything went fine, you should see live updates on `http://localhost:8080` when you save the file with some changes
 
 # What's bundled
 
@@ -54,7 +54,7 @@ In the `package.json` file, you can find the following scripts:
 
 - `npm run dev` - starts the development server
 - `npm run build` - builds the app
-- `npm run start` - starts the production build of the app. **Make sure you are providing `PORT` env variable to this command**
+- `npm run start` - starts the production build of the app. **Make sure you are providing `PORT` and `HOST` env variables to this command**
 - `npm run prepare` - install the git hooks (pre-commit, pre-push)
 - `npm run lint` - run ESLint check against the all source files
 - `npm run test` - runs unit/integration tests (`*.test.ts(x)` files)
