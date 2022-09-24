@@ -26,7 +26,13 @@ fastify.register(fastifyStatic, {
 });
 
 fastify.get("*", async (request, reply) => {
-  const protocol = request.protocol;
+  const protocol =
+    // When hosting the app on cloud application platform
+    // (e.g. heroku or render.com) we won't get access to the original request,
+    // since it's covered by internal network requests.
+    // We can receive details like original request's protocol via
+    // custom headers in this case: "x-forwarded-proto".
+    request.headers["x-forwarded-proto"] ?? request.protocol;
 
   const appUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
 
