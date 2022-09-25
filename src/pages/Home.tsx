@@ -4,7 +4,7 @@ import { A } from "../config/router";
 
 export const Home = () => (
   <>
-    <Header>Hello world</Header>
+    <Header>Hello world!</Header>
     <Paragraph>
       Hi! This is a really simple project. It shows the usage of&nbsp;
       {ssrToolsLink} combined with {fastifyLink}.
