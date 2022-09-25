@@ -10,6 +10,13 @@ export const Document: FC<{
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>template-with-fastify</title>
+      <meta
+        name="description"
+        content={
+          "This is a really simple project. It shows the usage of" +
+          " ssr-tools combined with fastify."
+        }
+      />
       <Fonts.Preconnect />
     </head>
     <body>
