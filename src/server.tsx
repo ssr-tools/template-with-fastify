@@ -5,14 +5,21 @@ import fastifyCompress from "@fastify/compress";
 import { webpackConfig } from "./config/webpackConfig";
 import { URL } from "url";
 import { Document } from "./components/Document.server";
+import path from "path";
+import dotenv from "dotenv";
 
 import { Providers } from "./components/Providers.server";
-import { fetchManifest } from "@ssr-tools/core/fetchManifest";
+import { loadManifest } from "@ssr-tools/core/loadManifest";
 import { App } from "./components/App";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ErrorOccurred } from "./pages/ErrorOccurred";
 
-let manifestCache: ReturnType<typeof fetchManifest> | null = null;
+dotenv.config();
+
+const assetsPrefix =
+  webpackConfig.assetsPrefix instanceof URL
+    ? webpackConfig.assetsPrefix.pathname
+    : webpackConfig.assetsPrefix;
 
 const fastify = Fastify({
   logger: true,
@@ -36,32 +43,14 @@ fastify.get("*", async (request, reply) => {
 
   const appUrl = new URL(request.url, `${protocol}://${request.headers.host}`);
 
-  const assetsUrl = new URL("/" + webpackConfig.assetsPrefix, appUrl);
+  const assetsUrl = new URL(assetsPrefix, appUrl);
 
-  const manifestUrl = `${assetsUrl}/manifest.json`;
+  const manifestPath = path.join(
+    webpackConfig.clientOutputPath,
+    "manifest.json"
+  );
 
-  manifestCache =
-    process.env.NODE_ENV !== "development" && manifestCache
-      ? manifestCache
-      : fetchManifest(manifestUrl);
-
-  const manifest = await manifestCache;
-
-  if (!manifest) {
-    return reply
-      .type("text/html; charset=UTF-8")
-      .status(500)
-      .send(
-        "<!DOCTYPE html>" +
-          renderToStaticMarkup(
-            <Document>
-              <ErrorOccurred
-                error={new Error(`Cannot load manifest from "${manifestUrl}"`)}
-              />
-            </Document>
-          )
-      );
-  }
+  const manifest = await loadManifest(manifestPath);
 
   const mainScriptUrl = `${assetsUrl}/${manifest.main}`;
 

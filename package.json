@@ -17,6 +17,7 @@
     "@ssr-tools/core": "^0.0.15",
     "@ssr-tools/css": "^0.0.16",
     "@ssr-tools/router": "^0.0.6",
+    "dotenv": "^16.0.3",
     "fastify": "^4.11.0",
     "long": "^5.2.1",
     "react": "^18.2.0",

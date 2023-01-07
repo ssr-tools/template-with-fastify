@@ -1,4 +1,7 @@
 import { createWebpackConfig } from "@ssr-tools/core/createWebpackConfig";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const appHost = process.env.HOST;
 
@@ -18,15 +21,6 @@ export const webpackConfig = createWebpackConfig(({ resolvePath }) => ({
   clientOutputPath: resolvePath(["dist", "client"]),
   serverEntryPath: resolvePath(["src", "server.tsx"]),
   serverOutputPath: resolvePath(["dist", "server"]),
-  extendServerResolve: (resolve) => ({
-    ...resolve,
-    alias: {
-      ...resolve.alias,
-      // Fixes module resolution problem in fastify:
-      // https://github.com/fastify/help/issues/272
-      "tiny-lru": "tiny-lru/lib/tiny-lru.js",
-    },
-  }),
   devServerPort: 8080,
   appHost,
   appPort,
